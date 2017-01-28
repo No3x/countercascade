@@ -3,7 +3,8 @@ sudo: false # faster builds
 jdk:
 - oraclejdk8
 
-script: "mvn cobertura:cobertura"
+before_install:
+ - chmod +x gradlew
 
 after_success:
 - bash <(curl -s https://codecov.io/bash)

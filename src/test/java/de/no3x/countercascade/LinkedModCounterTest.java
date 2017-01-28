@@ -10,6 +10,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import java.util.concurrent.TimeUnit;
 
 import static org.hamcrest.core.Is.is;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.only;
 import static org.mockito.Mockito.verify;
 
@@ -26,6 +27,14 @@ public class LinkedModCounterTest {
     @Before
     public void setUp() {
         linkedModCounter = new LinkedModCounter(60, nextModCounter);
+    }
+
+    @Test
+    public void incrementWithOutOverflow() throws Exception {
+
+        Assert.assertThat( linkedModCounter.getCount(), is(0));
+        linkedModCounter.increment();
+        verify(nextModCounter, never()).increment();
     }
 
     @Test

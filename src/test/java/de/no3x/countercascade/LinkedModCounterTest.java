@@ -30,9 +30,16 @@ public class LinkedModCounterTest {
     }
 
     @Test
-    public void incrementWithOutOverflow() throws Exception {
-
+    public void incrementWithoutOverflow() throws Exception {
         Assert.assertThat( linkedModCounter.getCount(), is(0));
+        linkedModCounter.increment();
+        verify(nextModCounter, never()).increment();
+    }
+
+    @Test
+    public void incrementWithOverflowWithoutNext() throws Exception {
+        Assert.assertThat( linkedModCounter.getCount(), is(0));
+        linkedModCounter.setNext(null);
         linkedModCounter.increment();
         verify(nextModCounter, never()).increment();
     }

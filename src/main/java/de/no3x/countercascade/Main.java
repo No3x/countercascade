@@ -17,7 +17,7 @@ public class Main {
         new Thread(() -> {
             while (!Thread.currentThread().isInterrupted()) {
                 try {
-                    Thread.sleep(TimeUnit.MILLISECONDS.toMillis(1));
+                    Thread.sleep(TimeUnit.SECONDS.toMillis(1));
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

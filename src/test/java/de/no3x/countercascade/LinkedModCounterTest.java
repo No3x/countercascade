@@ -39,7 +39,7 @@ public class LinkedModCounterTest {
     @Test
     public void incrementWithOverflowWithoutNext() throws Exception {
         Assert.assertThat( linkedModCounter.getCount(), is(0));
-        linkedModCounter.setNext(null);
+        linkedModCounter = new LinkedModCounter(60, null);
         linkedModCounter.increment();
         verify(nextModCounter, never()).increment();
     }

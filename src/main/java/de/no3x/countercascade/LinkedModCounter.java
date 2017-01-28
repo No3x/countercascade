@@ -19,8 +19,4 @@ public class LinkedModCounter extends ModCounter {
         }
         return 0;
     }
-
-    public void setNext(LinkedModCounter next) {
-        this.next = next;
-    }
 }

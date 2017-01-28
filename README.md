@@ -2,7 +2,7 @@
 This is a example about using counter to build something useful like a clock. 
 Inspired by [cprogramming.com](http://www.cprogramming.com/tips/tip/increment-and-decrement-counters-with-rollover)
 
-![untitled2.svg](assets/countersClassDiagram.svg)
+![untitled2.svg](https://rawgit.com/No3x/countercascade/master/assets/countersClassDiagram.svg)
 # Counter
 The counter stores a value that can be `incremented` and `decremented` in a multithread safe way realized with an `AtomicInteger`.
 
@@ -25,7 +25,7 @@ Let's transfer this to the time. A minute consists of 60s - after the 59th secon
 So obviously this is the same as `f(t) = t % 60`.
 The visualization shows the seconds, minutes and hours over 61 minutes in seconds.
 
-![untitled.svg](assets/counters.svg)
+![untitled.svg](https://rawgit.com/No3x/countercascade/master/assets/counters.svg)
 After 60s a minute passed. So it's the same principle for the minutes. After 60 minutes a hour passed. After 24 hours a day passed.
 So we have some kind of carry for each unit if it resets to 0. We need to carry the next bigger unit.
 

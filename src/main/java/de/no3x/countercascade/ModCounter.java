@@ -17,8 +17,7 @@ public class ModCounter extends Counter {
 
     @Override
     public int increment() {
-        set( super.increment() % mod);
-        return 0;
+        return set( super.increment() % mod);
     }
 
     @Override

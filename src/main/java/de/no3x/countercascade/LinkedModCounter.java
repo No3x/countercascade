@@ -4,7 +4,7 @@ package de.no3x.countercascade;
  * Created by No3x on 21.01.2017.
  */
 public class LinkedModCounter extends ModCounter {
-    private LinkedModCounter next;
+    private final Counter next;
 
     public LinkedModCounter(final int mod, final LinkedModCounter next) {
         super(mod);

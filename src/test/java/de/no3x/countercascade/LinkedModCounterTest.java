@@ -1,58 +1,74 @@
 package de.no3x.countercascade;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.concurrent.TimeUnit;
 
-import static org.hamcrest.core.Is.is;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.only;
-import static org.mockito.Mockito.verify;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.*;
 
 /**
- * Created by noex_ on 22.01.2017.
+ * Created by No3x on 22.01.2017.
  */
-@RunWith(MockitoJUnitRunner.class)
-public class LinkedModCounterTest {
+@ExtendWith(MockitoExtension.class)
+class LinkedModCounterTest {
 
+    private LinkedModCounter linkedModCounter;
+    
     @Mock
     private LinkedModCounter nextModCounter;
-    private LinkedModCounter linkedModCounter;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         linkedModCounter = new LinkedModCounter(60, nextModCounter);
     }
 
     @Test
-    public void incrementWithoutOverflow() throws Exception {
-        Assert.assertThat( linkedModCounter.getCount(), is(0));
+    void increment_withoutOverflowWithNext_doesNotNextIncrement() {
+        assertThat(linkedModCounter.getCount()).isZero();
+
         linkedModCounter.increment();
+
         verify(nextModCounter, never()).increment();
     }
 
     @Test
-    public void incrementWithOverflowWithoutNext() throws Exception {
-        Assert.assertThat( linkedModCounter.getCount(), is(0));
+    void increment_withoutOverflowWithoutNext_doesNotNextIncrement() {
         linkedModCounter = new LinkedModCounter(60, null);
+        assertThat(linkedModCounter.getCount()).isZero();
+
         linkedModCounter.increment();
+
         verify(nextModCounter, never()).increment();
     }
 
     @Test
-    public void incrementWithOverflow() throws Exception {
+    void increment_withOverflowWithoutNext_doesNotNextIncrement() {
+        assertThat(linkedModCounter.getCount()).isZero();
+        linkedModCounter = new LinkedModCounter(60, null);
 
-        Assert.assertThat( linkedModCounter.getCount(), is(0));
         for (int i = 0; i < TimeUnit.MINUTES.toSeconds(1); i++) {
             linkedModCounter.increment();
         }
-        verify(nextModCounter, only()).increment();
+        linkedModCounter.increment();
 
+        verify(nextModCounter, never()).increment();
+    }
+
+    @Test
+    void increment_withOverflowWithNext_doesIncrement() {
+        assertThat(linkedModCounter.getCount()).isZero();
+
+        for (int i = 0; i < TimeUnit.MINUTES.toSeconds(1); i++) {
+            linkedModCounter.increment();
+        }
+
+        assertThat(linkedModCounter.getCount()).isZero();
+        verify(nextModCounter, only()).increment();
     }
 
 }

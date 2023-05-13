@@ -1,35 +1,45 @@
 package de.no3x.countercascade;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.hamcrest.core.Is.is;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * Created by noex_ on 22.01.2017.
+ * Created by No3x on 22.01.2017.
  */
-public class CounterTest {
+@ExtendWith(MockitoExtension.class)
+class CounterTest {
 
-    private Counter counter = new Counter();
+    private final Counter counter = new Counter();
 
     @Test
-    public void increment() throws Exception {
-        Assert.assertThat(counter.getCount(), is(0));
+    void increment() {
+        assertThat(counter.getCount()).isZero();
         counter.increment();
         counter.increment();
-        Assert.assertThat(counter.getCount(), is(2));
+        assertThat(counter.getCount()).isEqualTo(2);
     }
 
     @Test
-    public void decrement() throws Exception {
-        Assert.assertThat(counter.getCount(), is(0));
+    void decrement() {
+        assertThat(counter.getCount()).isZero();
         counter.decrement();
         counter.decrement();
-        Assert.assertThat(counter.getCount(), is(-2));
+        assertThat(counter.getCount()).isEqualTo(-2);
     }
 
     @Test
-    public void testToString() throws Exception {
-        Assert.assertThat(counter.toString(), is("0"));
+    void set() {
+        assertThat(counter.getCount()).isZero();
+        assertThat(counter.set(1)).isZero();
+        assertThat(counter.set(2)).isOne();
+        assertThat(counter.getCount()).isEqualTo(2);
+    }
+
+    @Test
+    void testToString() {
+        assertThat(counter).hasToString("0");
     }
 }

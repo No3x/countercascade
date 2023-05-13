@@ -1,7 +1,7 @@
 package de.no3x.countercascade;
 
-/**
- * Created by No3x on 21.01.2017.
+/*
+  Created by No3x on 21.01.2017.
  */
 
 import java.util.concurrent.atomic.AtomicInteger;
@@ -10,7 +10,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * Simple Counter that stores the count value.
  */
 public class Counter {
-    private AtomicInteger count = new AtomicInteger(0);
+    private final AtomicInteger count = new AtomicInteger(0);
 
     public int increment() {
         return count.incrementAndGet();
@@ -30,6 +30,6 @@ public class Counter {
 
     @Override
     public String toString() {
-        return "" + getCount();
+        return String.valueOf(getCount());
     }
 }

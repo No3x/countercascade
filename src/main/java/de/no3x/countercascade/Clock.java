@@ -27,14 +27,12 @@ public class Clock {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("Clock{");
-        sb.append("seconds=")
-          .append(seconds);
-        sb.append(", minutes=")
-          .append(minutes);
-        sb.append(", hours=")
-          .append(hours);
-        sb.append('}');
-        return sb.toString();
+        return "Clock{" + "seconds=" +
+                seconds +
+                ", minutes=" +
+                minutes +
+                ", hours=" +
+                hours +
+                '}';
     }
 }
